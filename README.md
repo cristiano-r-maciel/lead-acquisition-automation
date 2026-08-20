@@ -111,11 +111,11 @@ The lead is automatically created or updated inside HubSpot CRM for centralized 
 
 ### System Architecture
 
-![Lead Acquisition Automation Architecture](cristiano_architecture_diagram_info.png)
+![Lead Acquisition Automation Architecture](architecture/architecture-diagram.png)
 
 ### n8n Workflow
 
-![n8n Lead Automation Workflow](n8n-workflow.jpg)
+![n8n Lead Automation Workflow](screenshots/n8n-workflow.jpg)
 
 ```text
                     GOOGLE ADS
@@ -210,8 +210,8 @@ The repository uses fictitious information for demonstration purposes.
 ```
 ### Try the Workflow
 
-- [View the sanitized n8n workflow](lead-automation-workflow-demo.json)
-- [View sample lead payload](sample-lead.json)
+- [View the sanitized n8n workflow](n8n/lead-automation-workflow-demo.json)
+- [View sample lead payload](examples/sample-lead.json)
 
 > The workflow is provided for demonstration purposes. Production credentials and environment-specific identifiers have been removed.
 
