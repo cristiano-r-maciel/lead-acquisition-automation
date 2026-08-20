@@ -8,7 +8,7 @@ The system connects a landing page form with **n8n, SMS notifications, and HubSp
 
 ---
 
-## 🎯 Business Problem
+## Business Problem
 
 The business generates leads through Google Ads campaigns that direct potential customers to dedicated landing pages.
 
@@ -25,7 +25,7 @@ This automation creates an immediate connection between **lead generation, commu
 
 ---
 
-## ⚙️ Solution
+## Solution
 
 The automation processes every new form submission in real time.
 
@@ -50,7 +50,7 @@ Data Processing
 
 ---
 
-## 🔄 Workflow
+## Workflow
 
 ### 1. Google Ads
 
@@ -89,7 +89,7 @@ The lead is automatically created or updated inside HubSpot CRM for centralized 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **n8n** — Workflow automation and orchestration
 * **HubSpot CRM** — Lead and contact management
@@ -101,7 +101,7 @@ The lead is automatically created or updated inside HubSpot CRM for centralized 
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```text
                     GOOGLE ADS
@@ -131,7 +131,7 @@ The lead is automatically created or updated inside HubSpot CRM for centralized 
 
 ---
 
-## 🔐 Security & Privacy
+## Security & Privacy
 
 The production workflow is **not included in this repository**.
 
@@ -161,7 +161,7 @@ No real lead or customer data is included in this repository.
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```text
 lead-acquisition-crm-automation/
@@ -183,7 +183,7 @@ lead-acquisition-crm-automation/
 
 ---
 
-## 🧪 Example Lead
+## Example Lead
 
 The repository uses fictitious information for demonstration purposes.
 
@@ -196,7 +196,7 @@ The repository uses fictitious information for demonstration purposes.
 
 ---
 
-## 💡 What This Project Demonstrates
+## What This Project Demonstrates
 
 This project demonstrates practical experience with:
 
@@ -216,7 +216,7 @@ Most importantly, this is based on a **real-world business automation use case**
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 Possible future versions of the system could include:
 
@@ -230,7 +230,7 @@ Possible future versions of the system could include:
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This repository is intended for **portfolio and demonstration purposes**.
 
