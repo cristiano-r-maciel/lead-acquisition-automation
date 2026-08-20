@@ -1,0 +1,241 @@
+{
+  "name": "PORTFOLIO - Lead Acquisition & CRM Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "portfolio-lead-form",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        224,
+        336
+      ],
+      "name": "Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e2fa66b5-95b1-49af-85b8-f97c341fc90a",
+              "name": "=firstname",
+              "value": "={{$json.body.firstname}}",
+              "type": "string"
+            },
+            {
+              "id": "c625623a-a326-4e6a-8823-4f681d1e2280",
+              "name": "lastname",
+              "value": "={{$json.body.lastname}}",
+              "type": "string"
+            },
+            {
+              "id": "a95fd756-6d56-48d8-8153-d5f89da95075",
+              "name": "phone",
+              "value": "={{ (() => {\n  const digits = $json.body.phone.replace(/\\D/g, '');\n  if (digits.length === 10) return '+1' + digits;\n  if (digits.length === 11 && digits.startsWith('1')) return '+' + digits;\n  return ''; // inválido — cai no ramo \"false\" do If e não tenta enviar SMS\n})() }}",
+              "type": "string"
+            },
+            {
+              "id": "1807d474-f90b-4976-9f13-4129fde6a267",
+              "name": "Origem da Lead",
+              "value": "Google_Ads",
+              "type": "string"
+            },
+            {
+              "id": "c76b9dad-88cb-46d9-9166-4d6b821e6ea4",
+              "name": "tratamento",
+              "value": "limpeza_de_pele",
+              "type": "string"
+            },
+            {
+              "id": "1ec30f9f-44ec-4e7c-9cf1-69bc1ee2fccb",
+              "name": "hs_lead_status",
+              "value": "NEW",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        432,
+        336
+      ],
+      "name": "Normalize-Edit-Data"
+    },
+    {
+      "parameters": {
+        "authentication": "appToken",
+        "email": "={{ $json.phone.replace(/\\D/g, '') }}@leads.example.com",
+        "additionalFields": {
+          "customPropertiesUi": {
+            "customPropertiesValues": [
+              {
+                "property": "lead_source",
+                "value": "=Google Ads"
+              },
+              {
+                "property": "treatment",
+                "value": "3D Analysis"
+              }
+            ]
+          },
+          "firstName": "={{ $json.firstname }}",
+          "lastName": "={{ $json.lastname }}",
+          "phoneNumber": "={{ $json.phone }}"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.2,
+      "position": [
+        912,
+        192
+      ],
+      "name": "Create or update a contact",
+      "credentials": {
+        "hubspotAppToken": {
+          "name": "HubSpot Demo Credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+15555550100",
+        "to": "={{ $json.phone }}",
+        "message": "=Bonjour {{ $json.firstname }} 👋  Merci d'avoir contacté Example Clinic.  Nous avons bien reçu votre demande.  Une conseillère communiquera avec vous très bientôt.  À bientôt !",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        912,
+        416
+      ],
+      "name": "Send an SMS/MMS/WhatsApp message",
+      "credentials": {
+        "twilioApi": {
+          "name": "Twilio Demo Credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "07f556b5-86c3-4f0d-a8e5-ad307fa136b1",
+              "leftValue": "={{$json.phone}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        640,
+        336
+      ],
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "from": "+15555550100",
+        "to": "+15555550101",
+        "message": "=🔔 Novo lead recebido!\nNome: {{ $json.firstname }} {{ $json.lastname }}\nTelefone: {{ $json.phone || $json.body.phone }}\nOrigem: {{ $json['Origem da Lead'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        640,
+        528
+      ],
+      "name": "Notify Staff",
+      "credentials": {
+        "twilioApi": {
+          "name": "Twilio Demo Credential"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize-Edit-Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize-Edit-Data": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notify Staff",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create or update a contact",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create or update a contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "nodeGroups": [],
+  "tags": []
+}
