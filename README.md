@@ -203,7 +203,8 @@ The repository uses fictitious information for demonstration purposes.
 
 ```json
 {
-  "name": "Marie Example",
+  "firstname": "Marie",
+  "lastname": "Example",
   "phone": "+15555550123"
 }
 ```
