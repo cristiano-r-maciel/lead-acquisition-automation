@@ -109,6 +109,10 @@ The lead is automatically created or updated inside HubSpot CRM for centralized 
 
 ## Architecture
 
+### System Architecture
+
+![Lead Acquisition Automation Architecture](cristiano_architecture_diagram_info.png)
+
 ### n8n Workflow
 
 ![n8n Lead Automation Workflow](n8n-workflow.jpg)
