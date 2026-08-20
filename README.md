@@ -1,5 +1,11 @@
 # Lead Acquisition & CRM Automation
 
+![n8n](https://img.shields.io/badge/n8n-Workflow_Automation-EA4B71)
+![HubSpot](https://img.shields.io/badge/HubSpot-CRM-FF7A59)
+![Twilio](https://img.shields.io/badge/Twilio-SMS-F22F46)
+![Google Ads](https://img.shields.io/badge/Google_Ads-Lead_Generation-4285F4)
+![Webhooks](https://img.shields.io/badge/Webhooks-Real--Time_Integration-4A5568)
+
 A real-world lead automation pipeline designed to automatically process leads generated through Google Ads campaigns.
 
 The system connects a landing page form with **n8n, SMS notifications, and HubSpot CRM**, allowing new leads to be processed immediately without depending on manual intervention.
