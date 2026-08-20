@@ -103,6 +103,10 @@ The lead is automatically created or updated inside HubSpot CRM for centralized 
 
 ## Architecture
 
+### n8n Workflow
+
+![n8n Lead Automation Workflow](n8n-workflow.jpg)
+
 ```text
                     GOOGLE ADS
                          │
