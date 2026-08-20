@@ -207,6 +207,12 @@ The repository uses fictitious information for demonstration purposes.
   "phone": "+15555550123"
 }
 ```
+### Try the Workflow
+
+- [View the sanitized n8n workflow](lead-automation-workflow-demo.json)
+- [View sample lead payload](sample-lead.json)
+
+> The workflow is provided for demonstration purposes. Production credentials and environment-specific identifiers have been removed.
 
 ---
 
